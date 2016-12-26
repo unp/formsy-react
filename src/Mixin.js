@@ -115,13 +115,15 @@ module.exports = {
   },
 
   // We validate after the value has been set
-  setValue: function (value) {
+  setValue: function (value, ignoreValidation) {
     this.setState({
       _value: value,
       _isPristine: false
     }, function () {
-      this.context.formsy.validate(this);
-      //this.props._validate(this);
+      if (!ignoreValidation) {
+        this.context.formsy.validate(this);
+        //this.props._validate(this);
+      }
     }.bind(this));
   },
   resetValue: function () {
